@@ -111,7 +111,7 @@ export default {
       },
     ],
     posts: [],
-    loading: true,
+    loading: false,
     //loadingDialog=true,
     editedIndex: -1,
     editedItem: {
@@ -150,8 +150,7 @@ export default {
       this.$store
         .dispatch("post/initPost")
         .then((response) => {
-          this.posts = response.data.data;
-          console.log(response.data.data);
+         this.posts = response.slice(0,5);
         })
         .catch((error) => console.log(error))
         .finally(() => {
@@ -206,10 +205,14 @@ export default {
     },
 
     deletePost() {
+      this.loading = true;
       this.$store
         .dispatch("post/deletePost", this.editedItem.id)
         .then((response) => {
-          // this.posts.splice(this.editedIndex, 1);
+           this.posts.splice(this.editedIndex, 1);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
   },

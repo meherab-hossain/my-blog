@@ -1,8 +1,8 @@
 export default {
     initPost(context, payload) {
-        return this.$axios.get('http://127.0.0.1:8000/api/post').then((response) => {
-            context.commit('setPosts', response.data)
-            return response
+        return this.$axios.get('https://jsonplaceholder.typicode.com/todos').then((response) => {
+            context.commit('setPosts', response.data.slice(0, 5))
+            return response.data.slice(0,5)
             //context.commit('setPOstsMeta', response.data.meta)
         })
         console.log('action')
@@ -29,7 +29,7 @@ export default {
 
     deletePost(context, id) {
         return this.$axios
-          .delete('http://127.0.0.1:8000/api/post/' + id)
+          .delete('https://jsonplaceholder.typicode.com/todos/' + id)
           .then(() => {
             context.commit('deletePost', id)
           })

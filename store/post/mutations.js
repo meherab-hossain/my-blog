@@ -6,7 +6,6 @@ export default {
         state.postsMeta = postsMeta
     },
     deletePost(state, id) {
-        console.log(state.posts = state.posts.filter(item => item.id !== id));
-
+        state.posts = state.posts.filter(item => item.id !== id)
     }
 }
